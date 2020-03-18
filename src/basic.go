@@ -56,6 +56,16 @@ func main() {
 	exchangeA, exchangeB = exchangeB, exchangeA
 	fmt.Println(exchangeA, exchangeB)
 
+	var str string
+	str2, str := "sss22", "..."
+	str3, str4 := "sss22", "sss22"
+	println(str2, str)
+
+	println("address: ", &str2, &str3, &str4)
+
+	str3, str4 = str4, str3
+	println("address: ", &str2, &str3, &str4)
+
 	testConst()
 	testConst2()
 }
@@ -79,25 +89,23 @@ func testConst() {
 
 	fmt.Println("a: ", a, ", b: ", b, ", c: ", c)
 
-
 	//FEMALE, MALE, UNKNOWN;
 
 }
 
-func testConst2()  {
+func testConst2() {
 
 	const (
-		a = iota   //0
-		b          //1
-		c          //2
-		d = "ha"   //独立值，iota += 1
-		e          //"ha"   iota += 1
-		f = 100    //iota +=1
-		g          //100  iota +=1
-		h = iota   //7,恢复计数
-		i          //8
+		a = iota //0
+		b        //1
+		c        //2
+		d = "ha" //独立值，iota += 1
+		e        //"ha"   iota += 1
+		f = 100  //iota +=1
+		g        //100  iota +=1
+		h = iota //7,恢复计数
+		i        //8
 	)
-	fmt.Println(a,b,c,d,e,f,g,h,i)
+	fmt.Println(a, b, c, d, e, f, g, h, i)
 
 }
-
