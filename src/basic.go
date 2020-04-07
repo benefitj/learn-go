@@ -68,6 +68,19 @@ func main() {
 
 	testConst()
 	testConst2()
+
+	i = 1000
+	// 条件表达式
+	if i/10 == 100 {
+		println("呵呵")
+	}
+
+	// 循环
+	testFor()
+
+	// 传递引用
+	testReference()
+
 }
 
 const CONST_A = "常量"
@@ -108,4 +121,47 @@ func testConst2() {
 	)
 	fmt.Println(a, b, c, d, e, f, g, h, i)
 
+}
+
+// 测试循环
+func testFor() {
+	for j := 0; j < 100; j++ {
+		if j/10 == 0 {
+			print("j ==>: ", j)
+		}
+	}
+	println()
+
+	sum := 0
+	for i := 0; i <= 10; i++ {
+		sum += i
+	}
+	println(sum)
+
+	strings := []string{"google", "runoob"}
+	for index, str := range strings {
+		println(index, " ==>: ", str)
+	}
+
+	numbers := []int{1, 2, 3, 4, 5, 6}
+	for index, num := range numbers {
+		println("第", index, "位的值位: ", num)
+	}
+
+}
+
+func swap(x *int, y *int) {
+	//var temp int
+	//temp = *x
+	//*x = *y
+	//*y = temp
+
+	*x, *y = *y, *x
+}
+
+// 测试传递引用
+func testReference() {
+	x, y := 100, 1220
+	swap(&x, &y)
+	print("x = ", x, ", y = ", y)
 }
