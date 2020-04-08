@@ -81,6 +81,21 @@ func main() {
 	// 传递引用
 	testReference()
 
+	// 数组
+	testArray()
+
+}
+
+func testArray() {
+	println("\n---------------------------\n")
+	var array = [][]int{{1, 2, 3, 5}, {4, 5, 3}}
+	for i := 0; i < len(array); i++ {
+		for j := 0; j < len(array[i]); j++ {
+			print(array[i][j], " ")
+		}
+		println()
+	}
+	println("\n---------------------------\n")
 }
 
 const CONST_A = "常量"
