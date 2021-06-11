@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func TestBasic2() {
 
 	// 测试操作符
 	testOperator()

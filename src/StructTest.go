@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func TestStruct() {
 
 	// 测试结构体
 	testStruct()

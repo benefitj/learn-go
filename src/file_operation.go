@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func main() {
+func TestFileOperate() {
 
 	start := time.Now()
 	f, err := os.Open("D:/home/znsx/log/znsx-biz.log")
@@ -87,7 +87,7 @@ func readFileByReader(f *os.File) string {
 
 // 写入文件
 func writeFile(data string, filename string) {
-	file := openFile(filename)
+	file := OpenFile(filename)
 	defer file.Close()
 	n, err := io.WriteString(file, data)
 	fmt.Println("写入文件：", filename, len(data), n)
@@ -101,7 +101,8 @@ func writeFile(data string, filename string) {
 	}
 }
 
-func openFile(filename string) *os.File {
+// 打开文件
+func OpenFile(filename string) *os.File {
 	if !CheckFileExist(filename) {
 		file, err := os.Create(filename)
 		if err != nil {
@@ -117,6 +118,7 @@ func openFile(filename string) *os.File {
 	}
 }
 
+// 检查文件是否存在
 func CheckFileExist(fileName string) bool {
 	_, err := os.Stat(fileName)
 	if os.IsNotExist(err) {

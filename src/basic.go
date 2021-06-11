@@ -13,7 +13,7 @@ var (
 	vname2 = "hhhhhh"
 )
 
-func main() {
+func TestBasic1() {
 
 	//var age int = 20
 	fmt.Println("age: " + "age")
