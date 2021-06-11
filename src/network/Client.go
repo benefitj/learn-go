@@ -2,52 +2,35 @@ package network
 
 import (
 	"bufio"
-	"encoding/binary"
-	"flag"
 	"fmt"
 	"net"
 	"os"
 	"strings"
-	"time"
 )
 
 func StartUdpClient() {
-	var host = flag.String("host", "localhost", "host")
-	var port = flag.String("port", "37", "port")
-
-	flag.Parse()
-
-	addr, err := net.ResolveUDPAddr("udp", *host+":"+*port)
+	socket, err := net.DialUDP("udp", nil, &net.UDPAddr{
+		IP:   net.IPv4(0, 0, 0, 0),
+		Port: 9100,
+	})
 	if err != nil {
-		fmt.Println("Can't resolve address: ", err)
-		os.Exit(1)
+		fmt.Println("连接服务端失败，err:", err)
+		return
 	}
-
-	conn, err := net.DialUDP("udp", nil, addr)
+	defer socket.Close()
+	sendData := []byte("Hello server")
+	_, err = socket.Write(sendData) // 发送数据
 	if err != nil {
-		fmt.Println("Can't dial: ", err)
-		os.Exit(1)
+		fmt.Println("发送数据失败，err:", err)
+		return
 	}
-	defer conn.Close()
-
-	_, err = conn.Write([]byte(""))
+	data := make([]byte, 4096)
+	n, remoteAddr, err := socket.ReadFromUDP(data) // 接收数据
 	if err != nil {
-		fmt.Println("failed:", err)
-		os.Exit(1)
+		fmt.Println("接收数据失败，err:", err)
+		return
 	}
-
-	data := make([]byte, 4)
-	_, err = conn.Read(data)
-	if err != nil {
-		fmt.Println("failed to read UDP msg because of ", err)
-		os.Exit(1)
-	}
-
-	t := binary.BigEndian.Uint32(data)
-	fmt.Println(time.Unix(int64(t), 0).String())
-
-	os.Exit(0)
-
+	fmt.Printf("recv:%v addr:%v count:%v\n", string(data[:n]), remoteAddr, n)
 }
 
 func StartTcpClient() {
