@@ -13,3 +13,8 @@ func TestStartUdpServer(t *testing.T) {
 	fmt.Println("TestStartUdpServer...")
 	StartUdpServer()
 }
+
+func TestStartTcpServer(t *testing.T) {
+	fmt.Println("TestStartTcpServer...")
+	StartTcpServer()
+}

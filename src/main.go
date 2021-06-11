@@ -648,4 +648,30 @@ func TestUserMethod() {
 	fmt.Println("i = ", i)
 	fmt.Println("i.int = ", i.int)
 
+	d := &Dog{}
+	d.Say()
+
+	c := &Cat{}
+	c.Say()
+
+}
+
+type Animal interface {
+	Say()
+}
+
+type Dog struct {
+	Animal
+}
+
+func (self *Dog) Say() {
+	fmt.Println("汪汪汪...")
+}
+
+type Cat struct {
+	Animal
+}
+
+func (self *Cat) Say() {
+	fmt.Println("喵喵喵...")
 }
