@@ -27,7 +27,8 @@ func main() {
 	//TestClosure()
 	//TestDefer()
 
-	TestUserMethod()
+	//TestUserMethod()
+	TestInterface()
 }
 
 // 测试Map
@@ -384,7 +385,7 @@ func TestFunc() {
 
 	TestVariableParameter(10, 20, 3, 643)
 
-	TestInterface(func() {})
+	TestInterfaceArgs(func() {})
 
 	fmt.Println("add(10, 22) = ", add(10, 22))
 	fmt.Println("addWithDefer(10, 22) = ", addWithDefer(10, 22))
@@ -413,7 +414,7 @@ func TestVariableParameter(args ...int) {
 	fmt.Printf("len: %d, %d \n", len(args), args)
 }
 
-func TestInterface(args ...interface{}) {
+func TestInterfaceArgs(args ...interface{}) {
 	for i, v := range args {
 		fmt.Println("i: ", i, " v: ", v)
 	}
@@ -654,6 +655,16 @@ func TestUserMethod() {
 	c := &Cat{}
 	c.Say()
 
+	cs := c.Say
+	cs() // 隐式传递
+
+	cs2 := (*Cat).Say
+	cs2(c) // 显示传递
+
+	cv := Cat{}
+	cvS := (*Cat).Say
+	cvS(&cv) // 隐式传递
+
 }
 
 type Animal interface {
@@ -674,4 +685,12 @@ type Cat struct {
 
 func (self *Cat) Say() {
 	fmt.Println("喵喵喵...")
+}
+
+func TestInterface() {
+	var studentInfo = make(map[string]interface{})
+	studentInfo["name"] = "礼拜天"
+	studentInfo["age"] = 20
+	fmt.Println("studentInfo: ", studentInfo)
+
 }
